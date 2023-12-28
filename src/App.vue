@@ -37,7 +37,13 @@ export default {
         if (product) {
           this.currentProduct = product;
           this.currentProductIndex++;
+        }else {
+          console.error("Failed to fetch product data");
         }
+      } else {
+        // Jika sudah mencapai indeks 20, kembali ke indeks 1
+        this.currentProductIndex = 1;
+        this.getNextProduct(); // Panggil kembali untuk mendapatkan produk pada indeks 1
       }
     },
   },

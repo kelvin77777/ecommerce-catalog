@@ -17,11 +17,14 @@ export default {
   },
   data() {
     return {
+      // Indeks produk saat ini
       currentProductIndex: 1,
+      // Objek yang menyimpan data produk saat ini
       currentProduct: {},
     };
   },
-  methods: {
+  methods: {  
+    // Fungsi untuk mendapatkan data produk dari API berdasarkan indeks
     async getApi(index) {
       try {
         const response = await axios.get(baseUrl + index);
@@ -31,6 +34,7 @@ export default {
         return null;
       }
     },
+    // Fungsi untuk mendapatkan produk selanjutnya
     async getNextProduct() {
       if (this.currentProductIndex <= 20) {
         const product = await this.getApi(this.currentProductIndex);
@@ -48,6 +52,7 @@ export default {
     },
   },
   mounted() {
+    // Setel produk pertama saat komponen dimuat
     this.getNextProduct();
   },
 };

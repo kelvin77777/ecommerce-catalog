@@ -1,5 +1,6 @@
 <template>
   <div class="all" :class="sectionClass">
+    <!-- Tampilan produk untuk kategori pakaian pria atau wanita -->
     <div class="app-container" v-if="isMenOrWomenCategory">
       <img
         :src="product.image"
@@ -56,6 +57,7 @@
         </button>
       </div>
     </div>
+    <!-- Tampilan untuk produk yang kategorinya bukan pria dan wanita -->
     <div v-if="!isMenOrWomenCategory">
       <img
         :src="require('@/assets/image.png')"
@@ -94,6 +96,7 @@
         Next Product
       </button>
     </div>
+    <!-- Loading overlay -->
     <div v-if="loading" class="loader-overlay">
       <div class="loader"></div>
     </div>
@@ -102,15 +105,18 @@
 
 <script>
 export default {
+  // Properti yang menerima objek produk dari induk (App.vue)
   props: {
     product: Object,
   },
   data() {
     return {
+      // Status loading untuk efek loading
       loading: false,
     };
   },
   computed: {
+    // Menentukan kelas CSS sesuai dengan kategori produk
     sectionClass() {
       const category = this.product.category;
       if (category === "men's clothing") {
@@ -121,18 +127,22 @@ export default {
         return "unavailable-product";
       }
     },
+    // Menentukan apakah produk termasuk dalam kategori pakaian pria atau wanita
     isMenOrWomenCategory() {
       const category = this.product.category;
       return category === "men's clothing" || category === "women's clothing";
     },
   },
   methods: {
+    // Fungsi untuk mendapatkan produk selanjutnya dengan efek loading
     getNextProduct() {
+      // Menampilkan efek loading
       this.loading = true;
 
+      // Setelah jeda 1 detik, panggil fungsi untuk mendapatkan produk selanjutnya
       setTimeout(() => {
         this.$emit("next-product");
-
+        // Sembunyikan efek loading setelah mendapatkan produk baru
         this.loading = false;
       }, 1000);
     },

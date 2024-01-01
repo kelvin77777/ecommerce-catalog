@@ -23,7 +23,7 @@ export default {
       currentProduct: {},
     };
   },
-  methods: {  
+  methods: {
     // Fungsi untuk mendapatkan data produk dari API berdasarkan indeks
     async getApi(index) {
       try {
@@ -41,7 +41,7 @@ export default {
         if (product) {
           this.currentProduct = product;
           this.currentProductIndex++;
-        }else {
+        } else {
           console.error("Failed to fetch product data");
         }
       } else {
